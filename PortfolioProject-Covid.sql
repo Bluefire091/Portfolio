@@ -12,7 +12,6 @@ FROM Portfolio.dbo.CovidVaccinations
 
 
 --ORDER BY FIRST AND SECOND COLUMNS (LOCATION AND DATE)
-
 SELECT location, date, total_cases, new_cases, total_deaths, population
 FROM Portfolio..CovidDeaths
 ORDER BY 1,2 DESC
@@ -47,6 +46,7 @@ WHERE location like 'Afg%'
 
 
 
+
 --MS SQL SERVER HAS TOP INSTEAD OF LIMIT
 SELECT TOP 5 *
 FROM Portfolio..CovidDeaths
@@ -62,6 +62,7 @@ FROM Portfolio..CovidDeaths
 WHERE location = 'United States'
 AND continent IS NOT NULL
 ORDER BY 2 DESC
+
 
 
 
@@ -141,6 +142,7 @@ JOIN Portfolio..CovidVaccinations CV
 
 
 
+
 --VACCINATION RATES BY POPULATION
 --AND ATERING A COLUMN DATA TYPE USING CONVERT
 --USING PARTIION WITHIN A SUM CLAUSE TO CREATE A CUMALATIVE COUNT
@@ -184,7 +186,6 @@ Population numeric,
 New_vaccinations numeric,
 Rolling_vaccination_count numeric
 )
-
 INSERT INTO  #PercentPopulationVaccinated
 SELECT CD.continent, CD.location, CD.date, CD.population, CV.new_vaccinations, SUM(CONVERT(INT, CV.new_vaccinations)) OVER (Partition BY CD.location ORDER BY CD.location, CD.date) AS rolling_vaccination_count
 FROM Portfolio..CovidDeaths CD
