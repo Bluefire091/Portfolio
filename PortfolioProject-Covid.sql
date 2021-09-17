@@ -103,6 +103,15 @@ ORDER BY percent_population_infection_rate DESC
 
 
 
+-- COVID INFECTION RATE BY COUNTRY TO BE USED IN A TIME-SERIES GRAPH
+SELECT date, location, population, MAX(total_cases) AS total_case_count, MAX((total_cases/population))*100 AS percent_population_infection_rate
+FROM Portfolio..CovidDeaths
+WHERE continent IS NOT NULL
+GROUP BY date, location, population
+ORDER BY percent_population_infection_rate DESC
+
+
+
 -- TOTAL CASES & DEATHS BY COUNTRY
 SELECT location, MAX(total_cases) AS Total_Cases_By_Country, MAX(total_deaths) AS Total_Deaths_By_Country
 FROM Portfolio..CovidDeaths
