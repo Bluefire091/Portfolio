@@ -56,6 +56,23 @@ ORDER BY date DESC
 
 
 
+--CHANGING DATA TYPE USING ALTER COLUMN
+ALTER TABLE portfolio.dbo.CovidDeaths
+ALTER COLUMN total_deaths int
+
+
+
+
+--CHANGE DATA TYPE USING CAST
+SELECT location, MAX(cast(total_cases as int)) AS Total_Cases_By_Country, MAX(total_deaths) AS Total_Deaths_By_Country
+FROM Portfolio..CovidDeaths
+WHERE continent IS NOT NULL
+GROUP BY location
+ORDER BY 1
+
+
+
+
 --CURRENT DEATH RATE FOR COVID FOR THE US POPULATION
 SELECT top 1 location, date, population, total_cases, total_deaths, (total_deaths/total_cases)*100 AS DeathPercentage
 FROM Portfolio..CovidDeaths
@@ -76,19 +93,12 @@ ORDER BY 1 DESC
 
 
 
---CHANGING DATA TYPE USING ALTER COLUMN
-ALTER TABLE portfolio.dbo.CovidDeaths
-ALTER COLUMN total_deaths int
-
-
-
-
---CHANGE DATA TYPE USING CAST
-SELECT location, MAX(cast(total_cases as int)) AS Total_Cases_By_Country, MAX(total_deaths) AS Total_Deaths_By_Country
+-- COVID INFECTION RATE BY COUNTRY
+SELECT location, population, MAX(total_cases) AS total_case_count, MAX((total_cases/population))*100 AS percent_population_infection_rate
 FROM Portfolio..CovidDeaths
 WHERE continent IS NOT NULL
-GROUP BY location
-ORDER BY 1
+GROUP BY location, population
+ORDER BY percent_population_infection_rate DESC
 
 
 
