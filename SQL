@@ -1,0 +1,5 @@
+--CREATE TABLE AND INSERT
+CREATE TABLE users (id INTEGER, name TEXT, age INTEGER);
+INSERT into users (id, name, age) values (1, 'Jane Doe', 27);
+INSERT into users (id, name, age) values (2, 'John', 33);
+SELECT * FROM users;
