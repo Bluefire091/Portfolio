@@ -1,0 +1,24 @@
+--CREATE TABLE AND INSERT
+CREATE TABLE users (
+id INTEGER, 
+name TEXT, 
+age INTEGER
+);
+INSERT into users (id, name, age) values (1, 'Jane Doe', 27);
+INSERT into users (id, name, age) values (2, 'John', 33);
+SELECT * FROM users;
+
+
+
+--ALTER TABLE NAME, RENAME COLUMN, ADD/DROP COLUMN
+ALTER TABLE people
+RENAME TO users;
+
+ALTER TABLE users
+RENAME COLUMN tag to username;
+
+ALTER TABLE users
+ADD COLUMN password TEXT;
+
+ALTER TABLE users
+DROP COLUMN is_admin
